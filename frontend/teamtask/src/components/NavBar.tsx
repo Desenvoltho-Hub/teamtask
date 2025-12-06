@@ -1,13 +1,16 @@
 import { useEffect, useRef, useState } from "react";
 import { motor } from "../engine/GrooveraCoreEngine";
+import { subscribe } from "diagnostics_channel";
 
 function NavBar() {
   const [incremento, setIncremento] = useState<string | number>();
   const motorUse = useRef(motor('')).current
 useEffect(() => {
-motorUse.subscribe(v => setIncremento(v))
-console.log(incremento)
-motorUse.set('pingPong')
+const unsubscribe = motorUse.subscribe(v => setIncremento(v))
+return () => {
+  unsubscribe()
+}
+
 }, [])
 
   return (
