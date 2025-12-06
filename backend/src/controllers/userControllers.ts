@@ -3,6 +3,8 @@ import { createUser } from "../services/userServices.js";
 import jwt from "jsonwebtoken";
 import { env } from "../config/env.js";
 import type { UserType } from "../utils/type.js";
+import { info } from "console";
+import { engenhoca } from "../services/engenhocaService.js";
 
 //!<userRegister>
 export const userRegister = async (req: Request, res: Response) => {

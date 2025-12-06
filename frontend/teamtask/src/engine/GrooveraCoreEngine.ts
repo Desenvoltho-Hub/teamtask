@@ -1,57 +1,27 @@
-//!<intensidadeCor>
-export const intensidadeCor = () => {
-  let intensidade: number = 0;
+//=====================================================================
+//! Groovera Core Engine  ⚙️
+//=====================================================================
+export const motor = (x: string | number) => {
+  let valor = x;
   function get() {
-    return intensidade;
+    return valor;
   }
-  function set(novoValor: number) {
-    intensidade = novoValor;
+  function set(novoValor: string | number) {
+    valor = novoValor;
+    listener.forEach((v) => v(valor));
   }
-  const start = () => {
-    const tick = () => {
-      intensidade += 1;
-    };
-    setInterval(() => {
-      if (intensidade < 600) {
-        tick();
-      }
-    }, 1);
-  };
 
+  const listener: ((v: number | string) => void)[] = [];
+
+  const subscribe = (fn: (v: number | string) => void) => listener.push(fn);
+  //===================================================================
+  //!Engrenagens do motor...
+  //===================================================================
+  
+  //===================================================================
   return {
+    subscribe,
     get,
     set,
-    start,
   };
 };
-
-export const efeitoSmooth = (palavra: string) => {
-  let arrayPalavra = palavra.split(""); // transforma em array de letras
-
-  function get() {
-    return arrayPalavra;
-  }
-
-  function set(novoValor: string[]) {
-    arrayPalavra = novoValor;
-  }
-
-  const ativarEfeito = () => {
-    arrayPalavra.forEach((letra, i) => {
-      setTimeout(() => {
-        const novoArray = [...arrayPalavra];
-        novoArray[i] = letra.toUpperCase(); // transforma a letra
-        set(novoArray);
-        console.log(novoArray.join("")); // pra testar
-      }, i * 100);
-    });
-  };
-
-  return {
-    get,
-    set,
-    ativarEfeito
-  };
-}
- 
-
