@@ -1,0 +1,10 @@
+import { connectDB } from './config/database.js'
+import { env } from './config/env.js'
+import {createServer} from './config/server.js'
+import router from './routes/userRoutes.js'
+const app = createServer()
+connectDB()
+app.listen(env.PORT, () => {
+    console.log(`Servidor rodando na porta ${env.PORT}`)
+})
+app.use('/user', router)
