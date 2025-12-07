@@ -3,7 +3,7 @@ import { motor } from "../engine/GrooveraCoreEngine";
 import { subscribe } from "diagnostics_channel";
 
 function NavBar() {
-  const [incremento, setIncremento] = useState<string | number>();
+  const [incremento, setIncremento] = useState<string | number | boolean>();
   const motorUse = useRef(motor('')).current
 useEffect(() => {
 const unsubscribe = motorUse.subscribe(v => setIncremento(v))
