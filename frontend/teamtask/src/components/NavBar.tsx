@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { motor } from "../engine/GrooveraCoreEngine";
+import { motor } from "../engine/LoovaEng";
 import { subscribe } from "diagnostics_channel";
 
 function NavBar() {
