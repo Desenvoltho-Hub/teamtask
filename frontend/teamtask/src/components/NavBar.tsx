@@ -1,14 +1,14 @@
 import { useEffect, useRef, useState } from "react";
-import { motor } from "../engine/LoovaEng";
+import { luva, motor } from "../engine/LuvaEng";
 import { subscribe } from "diagnostics_channel";
 
 function NavBar() {
   const [incremento, setIncremento] = useState<string | number | boolean>();
-  const motorUse = useRef(motor('')).current
+  
 useEffect(() => {
-const unsubscribe = motorUse.subscribe(v => setIncremento(v))
+
 return () => {
-  unsubscribe()
+  luva('pingPong', 100)
 }
 
 }, [])
