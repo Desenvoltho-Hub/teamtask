@@ -1,21 +1,20 @@
-import { useState } from "react";
-
 function NavBar() {
-  const [set, setState] = useState()
-  
-  return (
-    <div className="bg-secondary flex justify-between p-2 items-center">
-      <img src="/logoteamtasker.png" alt="logo" className="w-28 md:ml-20" />
-      <div>
-        <input
-          type="text"
-          onChange={(e) => (e.target.value)}
-          placeholder="Digite algo"
-        />
-        <div></div>
-      </div>
-    </div>
-  );
+    return ( 
+        <div className="flex justify-between items-center">
+            <div>
+
+            <img src="/logoteamtasker.png" alt="" className="w-30" />
+            </div>
+            <div className="md:mr-100">
+                <ul className="flex gap-20">
+                    <li className="links">Dashboard</li>
+                    <li className="links">Equipes</li>
+                    <li className="links">Tasks</li>
+                </ul>
+            </div>
+            
+        </div>
+     );
 }
 
 export default NavBar;

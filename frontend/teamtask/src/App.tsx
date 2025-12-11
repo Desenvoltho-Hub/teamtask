@@ -1,29 +1,21 @@
 import { Route, Routes } from "react-router-dom";
-import Dashboard from "./pages/Dashboard";
-import AppLayOut from "./pages/AppLayOut";
-import Home from "./pages/Home";
+import LandingPage from "./pages/LadingPage";
 import NavBar from "./components/NavBar";
-import SideBar from "./components/SideBar";
 
 function App() {
-  return (  
-    <div >
+  return ( 
     <Routes>
-      <Route path="/" element={<Home/>}/>
-      <Route path="/dashboard" element={
+      <Route path="/" element={<LandingPage/>}></Route>
+      <Route path="/user" element={
         <>
-        <NavBar/>
-        <div className="flex">
-        <SideBar/>
-        <Dashboard/>
-
-        </div>
-        </>
+        <NavBar />
         
-      }/>
+        </>
+      }>
+      
+      </Route>
     </Routes>
-    </div>
-  );
+   );
 }
 
 export default App;

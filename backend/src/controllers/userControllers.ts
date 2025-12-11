@@ -3,14 +3,14 @@ import { createUser } from "../services/userServices.js";
 import jwt from "jsonwebtoken";
 import { env } from "../config/env.js";
 import type { UserType } from "../utils/type.js";
-import { info } from "console";
-import { engenhoca } from "../services/engenhocaService.js";
+
 
 //!<userRegister>
 export const userRegister = async (req: Request, res: Response) => {
   try {
     const data = req.body;
     const user = await createUser(data);
+    console.log(data)
     const payload = env.JWT_SECRET;
     if (!payload) throw new Error("Jwt não definido");
     const token = jwt.sign({ id: user.id }, payload, { expiresIn: "1d" });
