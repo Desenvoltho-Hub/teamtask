@@ -24,3 +24,12 @@ export const createUser = async (data: UserType) => {
     throw err;
   }
 };
+//! Get
+export const userGetMe = async (user: UserType) => {
+  try {
+    const usuario = User.findById(user.id)
+    return usuario
+  } catch(err){
+    throw err
+  }
+}

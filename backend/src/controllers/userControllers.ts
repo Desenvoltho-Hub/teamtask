@@ -1,5 +1,5 @@
 import { type Request, type Response } from "express";
-import { createUser } from "../services/userServices.js";
+import { createUser, userGetMe } from "../services/userServices.js";
 import jwt from "jsonwebtoken";
 import { env } from "../config/env.js";
 import type { UserType } from "../utils/type.js";
@@ -10,7 +10,7 @@ export const userRegister = async (req: Request, res: Response) => {
   try {
     const data = req.body;
     const user = await createUser(data);
-    console.log(data)
+    
     const payload = env.JWT_SECRET;
     if (!payload) throw new Error("Jwt não definido");
     const token = jwt.sign({ id: user.id }, payload, { expiresIn: "1d" });
@@ -27,3 +27,14 @@ export const userRegister = async (req: Request, res: Response) => {
     res.status(400).json({ message: err.message });
   }
 };
+//! User Get
+export const userGet = async (req:Request, res: Response) => {
+  try {
+    const usuario = req.user
+    const response = await userGetMe(usuario)
+    
+    res.status(200).json({response})
+  } catch(err){
+    res.status(400).json({message: "Usuário não encontrado"})
+  }
+}

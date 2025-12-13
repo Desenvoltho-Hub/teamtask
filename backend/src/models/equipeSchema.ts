@@ -1,25 +1,21 @@
 import mongoose from "mongoose";
 
-export const TaskSchema = new mongoose.Schema({
-    title: {
+export const EquipeSchema = new mongoose.Schema({
+    name: {
         type: String,
         required: true,
     },
     description: {
         type: String,
     },
-    particpants: {
-        members: [mongoose.Types.ObjectId],
+      members: {
+        type: [mongoose.Types.ObjectId],
         ref: 'User'
     },
-    isCompleted: {
-        type: Boolean,
-        required: true
-    }, 
     creator: {
         type: mongoose.Types.ObjectId,
         ref: 'User',
         required: true
     }
 }, {timestamps: true})
-export const Task = mongoose.model('Task', TaskSchema)
+export const Equipe = mongoose.model('Equipe', EquipeSchema)

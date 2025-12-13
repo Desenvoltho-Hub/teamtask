@@ -6,5 +6,6 @@ export const UserContext = createContext<UserContextType>({
     state: userInitialState,
     dispatch: () => {},
     handleChange: () => {},
-    cadastrar: () => {}
+    cadastrar: () => {},
+    getMe: () => {}
 })

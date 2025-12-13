@@ -25,6 +25,7 @@ export const UseProvider = ({ children }: PropsWithChildren) => {
             [action.name]: action.value
           }
         };
+        
     }
   };
   const [state, dispatch] = useReducer(reducer, userInitialState);
@@ -53,8 +54,19 @@ export const UseProvider = ({ children }: PropsWithChildren) => {
     console.log(err)
   }
 }
+const getMe = async () => {
+  try {
+    const response = await api.get('user/me')
+    dispatch({
+      type: 'CADASTRO',
+      user: response.data.response
+    })
+  } catch(err){
+    console.log(err)
+  }
+}
   return (
-    <UserContext.Provider value={{ state, dispatch, handleChange, cadastrar }}>
+    <UserContext.Provider value={{ state, dispatch, handleChange, cadastrar, getMe }}>
       {children}
     </UserContext.Provider>
   );
