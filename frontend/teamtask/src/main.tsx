@@ -5,14 +5,17 @@ import App from "./App.tsx";
 import { BrowserRouter } from "react-router-dom";
 import { UseProvider } from "./providers/UserProvider.tsx";
 import { EquipeProvider } from "./providers/EquipeProvider.tsx";
+import { TaskProvider } from "./providers/TaskProvider.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>
       <UseProvider>
         <EquipeProvider>
-        <App />
-          </EquipeProvider>
+          <TaskProvider>
+            <App />
+          </TaskProvider>
+        </EquipeProvider>
       </UseProvider>
     </BrowserRouter>
   </StrictMode>

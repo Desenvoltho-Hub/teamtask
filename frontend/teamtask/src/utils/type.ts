@@ -85,14 +85,14 @@ export interface Task {
   title: string,
   description: string,
   status: string,
-  participants: string[]
+
   dataDeEntrega: string
   isCompleted: boolean
   
   equipe: string
 }
 export interface TaskState {
-  task: []
+  task: Task[]
   novaTask: Task
 }
 export const taskInitialState: TaskState = {
@@ -100,7 +100,7 @@ export const taskInitialState: TaskState = {
     novaTask: {
     title: '',
     description: '',
-    participants: [],
+
     isCompleted: false,
     equipe: '',
     dataDeEntrega: '',
@@ -111,9 +111,15 @@ export const taskInitialState: TaskState = {
 export type TaskAction = {
   type: 'TASK',
   task: Task[],
-  novaTask: Task
+
+} | {
+  type: 'INPUT',
+  name: string,
+  value: string
 }
 export interface TaskContextType {
   state: TaskState
   dispatch: Dispatch<TaskAction>
+  criarNovaTask: () => void
+  handleChange: (e: ChangeEvent<HTMLInputElement>) => void
 }
