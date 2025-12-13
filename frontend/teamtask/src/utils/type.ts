@@ -30,11 +30,8 @@ export const userInitialState: UserState = {
         password: ''
     }
 }
-//! Tasks
-export interface Task {
-    title: string
-    quantidade: string
-}
+
+
 
 //! Equipe
 
@@ -80,4 +77,43 @@ export type EquipeAction =
   name: string
   description: string
   members: number
+}
+//! Task
+
+export interface Task {
+
+  title: string,
+  description: string,
+  status: string,
+  participants: string[]
+  dataDeEntrega: string
+  isCompleted: boolean
+  
+  equipe: string
+}
+export interface TaskState {
+  task: []
+  novaTask: Task
+}
+export const taskInitialState: TaskState = {
+  task: [],
+    novaTask: {
+    title: '',
+    description: '',
+    participants: [],
+    isCompleted: false,
+    equipe: '',
+    dataDeEntrega: '',
+    status: ''
+
+  }
+}
+export type TaskAction = {
+  type: 'TASK',
+  task: Task[],
+  novaTask: Task
+}
+export interface TaskContextType {
+  state: TaskState
+  dispatch: Dispatch<TaskAction>
 }

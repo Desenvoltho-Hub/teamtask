@@ -12,7 +12,7 @@ function Tasks() {
       <TasksSearch />
       <TasksFilters />
       <TasksList />
-      <CreateTaskModal />
+  
     </div>
   );
 }
