@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
 import { addMembro, criarEquipe, deleteEquipe, equipesUsuario } from "../services/equipeServices.js";
-import type { EquipeType } from "../utils/type.js";
+
 
 export const equipeCreate = async(req:Request, res:Response) => {
     try {

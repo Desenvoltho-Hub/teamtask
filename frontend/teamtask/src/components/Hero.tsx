@@ -1,4 +1,5 @@
 import ModalCadastro from "./home/ModalCadastro";
+import ModalLogin from "./home/ModalLogin";
 
 function Hero() {
   return (
@@ -14,7 +15,11 @@ function Hero() {
               único lugar. Simples, rápido e eficiente — pronto para transformar
               a forma como você trabalha.
             </p>
+            
+              
             <ModalCadastro/>
+            
+            <ModalLogin />
           </div>
         </div>
       </div>

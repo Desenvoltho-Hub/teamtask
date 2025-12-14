@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../contexts/UserContext";
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function NavBar() {
   const [open, setOpen] = useState(false);
@@ -17,7 +17,7 @@ function NavBar() {
         <img src="/logoteamtasker.png" alt="Logo" className="w-28" />
 
     
-        <h1 className="text-4xl md:text-5xl text-primary font-extrabold border-l-4 border-primary pl-5 py-2 bg-base-100 rounded-r-xl shadow-lg">
+        <h1 className="text-4xl md:text-5xl text-primary font-extrabold border-l-4 rounded-2xl p-5 shadow-lg">
           {state.user?.name?.toUpperCase() || "USUÁRIO"}
         </h1>
 

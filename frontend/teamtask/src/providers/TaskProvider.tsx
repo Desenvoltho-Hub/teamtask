@@ -2,6 +2,7 @@ import { useReducer, type ChangeEvent, type PropsWithChildren } from "react";
 import {
   taskInitialState,
   type TaskAction,
+  type TaskDesign,
   type TaskState,
 } from "../utils/type";
 import { TaskContext } from "../contexts/TaskContext";
@@ -32,6 +33,12 @@ export const TaskProvider = ({ children }: PropsWithChildren) => {
             [action.name]: action.value
           }
         };
+        case "DESIGNAR_TASK": {
+            return {
+                ...state,
+                userId: action.userId
+            }
+        }
     }
   };
   const [state, dispatch] = useReducer(reducer, taskInitialState);
@@ -63,10 +70,21 @@ export const TaskProvider = ({ children }: PropsWithChildren) => {
       value: e.target.value,
     });
   };
-
+  const getTask = async () => {
+    try {
+        const response = await api.get('/task/task')
+        dispatch({
+            type: "TASK",
+            task: response.data.response
+        })
+    } catch(err) {
+        console.log(err)
+    }
+  }
+  
   return (
     <TaskContext.Provider
-      value={{ state, dispatch, criarNovaTask, handleChange }}
+      value={{ state, dispatch, criarNovaTask, handleChange, getTask }}
     >
       {children}
     </TaskContext.Provider>

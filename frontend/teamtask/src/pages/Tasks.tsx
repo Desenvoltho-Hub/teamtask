@@ -4,7 +4,7 @@ import TasksHeader from "../components/tasks/TaskHeader";
 import TasksList from "../components/tasks/TaskList";
 import TasksFilters from "../components/tasks/TasksFilter";
 import TasksSearch from "../components/tasks/TasksSearch";
-import { EquipeContext } from "../contexts/EquipeContext";
+
 
 
 function Tasks() {
@@ -15,6 +15,7 @@ function Tasks() {
       <CreateTaskModal/>
       <TasksSearch />
       <TasksFilters />
+      
       <TasksList />
   
     </div>

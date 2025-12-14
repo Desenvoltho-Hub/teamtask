@@ -1,4 +1,5 @@
 import express from 'express'
+
 import type mongoose from 'mongoose';
 export interface UserType {
   
@@ -18,4 +19,15 @@ export interface EquipeType {
   description: string
   members: string[]
   creator: string
+}
+export interface TaskType {
+
+  title: string,
+  description: string,
+  status: string,
+  participants: string[]
+  dataDeEntrega: Date
+  isCompleted: boolean
+  creator: string
+  equipe: string
 }

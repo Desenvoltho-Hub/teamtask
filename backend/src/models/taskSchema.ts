@@ -8,18 +8,30 @@ export const TaskSchema = new mongoose.Schema({
     description: {
         type: String,
     },
-    particpants: {
-        members: [mongoose.Types.ObjectId],
+    participants: {
+        type: [mongoose.Types.ObjectId],
         ref: 'User'
     },
-    isCompleted: {
-        type: Boolean,
+    status: {
+        type: String,
         required: true
     }, 
     creator: {
         type: mongoose.Types.ObjectId,
         ref: 'User',
         required: true
+    },
+    dataDeEntrega: {
+        type: String,
+        required: true
+    },
+    isCompleted: {
+        type: Boolean,
+        required: true
+    },
+    equipe: {
+        type: mongoose.Types.ObjectId,
+        ref: 'Equipe'
     }
 }, {timestamps: true})
 export const Task = mongoose.model('Task', TaskSchema)

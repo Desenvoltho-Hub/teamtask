@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import "cally";
 import { TaskContext } from "../../contexts/TaskContext";
-import type { Equipe } from "../../utils/type";
 import { EquipeContext } from "../../contexts/EquipeContext";
 function CreateTaskModal() {
   const { state, criarNovaTask, handleChange } = useContext(TaskContext);
@@ -68,7 +67,7 @@ function CreateTaskModal() {
               name="equipe" 
               className="select"
               value={state.novaTask.equipe} 
-              onChange={handleChange}
+              onChange={(e) => handleChange(e)}
             >
               <option value="" disabled>
                 Selecione a equipe

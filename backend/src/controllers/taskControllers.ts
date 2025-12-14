@@ -1,0 +1,40 @@
+import type { Request, Response } from "express";
+import { addTask, addUserTask, taskGet} from "../services/taskServices.js";
+
+//! Criar Task
+export const criarTask = async (req: Request, res: Response) => {
+    try {
+        const data: any = req.body
+        const userId: any = req.user
+        const creator = userId.id
+        console.log(creator)
+        const response = await addTask({data, creator})
+        res.status(201).json({message: 'Task criada com sucesso!', response}) 
+    } catch(err) {
+     res.status(400).json({message: err})   
+    }
+}
+//! Task Add User
+
+export const taskUser = async (req: Request, res: Response) => {
+    try {
+        const user = req.params.user
+        const task = req.params.task
+        const response = await addUserTask({user, task})
+        res.status(200).json({message: 'Usuário adicionado a task com sucesso!'})
+    } catch(err) {
+        console.log(err)
+    }
+}
+
+//! Task Get 
+export const getTask = async (req: Request, res: Response) => {
+    try {
+        const user = req.user.id
+       
+        const response = await taskGet(user)
+        res.status(200).json({message: 'Tarefas do usuário encontradas com sucesso!', response})
+    } catch(err) {
+        res.status(400).json({err})
+    }
+}

@@ -1,26 +1,29 @@
 import { CheckCircle, Clock, Flag } from "lucide-react";
+import ModalDetalhesTask from "./ModalDetalhesTask";
 
-function TaskCard() {
+function TaskCard({title, description, dataDeEntrega, status}) {
   return (
     <div className="p-6 bg-base-200 rounded-2xl shadow-sm hover:shadow-md transition cursor-pointer">
       <div className="flex justify-between items-center mb-3">
-        <h2 className="text-xl font-semibold">Criar layout da Dashboard</h2>
+        <h2 className="text-xl font-semibold">{title}</h2>
         <Flag size={20} className="text-primary" />
       </div>
 
       <p className="text-base-content/70 mb-4">
-        Definir estrutura inicial da dashboard com cards de status e gráficos.
+        {description}
       </p>
 
+          Prazo:
       <div className="flex justify-between items-center text-sm">
         <div className="flex items-center gap-2">
           <Clock size={16} />
-          <span>Vence em 2 dias</span>
+          <span>{dataDeEntrega}</span>
         </div>
 
         <div className="flex items-center gap-2">
           <CheckCircle size={16} className="text-success" />
-          <span>Em andamento</span>
+          <span>{status}</span>
+          <ModalDetalhesTask/>
         </div>
       </div>
     </div>

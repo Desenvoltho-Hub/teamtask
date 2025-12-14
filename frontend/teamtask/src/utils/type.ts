@@ -81,7 +81,7 @@ export type EquipeAction =
 //! Task
 
 export interface Task {
-
+  _id: string,
   title: string,
   description: string,
   status: string,
@@ -94,10 +94,12 @@ export interface Task {
 export interface TaskState {
   task: Task[]
   novaTask: Task
+  userId: TaskDesign
 }
 export const taskInitialState: TaskState = {
   task: [],
     novaTask: {
+      _id: '',
     title: '',
     description: '',
 
@@ -106,20 +108,32 @@ export const taskInitialState: TaskState = {
     dataDeEntrega: '',
     status: ''
 
-  }
+  },
+ 
 }
 export type TaskAction = {
   type: 'TASK',
   task: Task[],
+  
 
 } | {
   type: 'INPUT',
   name: string,
   value: string
+} | { 
+  type: 'DESIGNAR_TASK'
+  userId: TaskDesign
+
 }
 export interface TaskContextType {
   state: TaskState
   dispatch: Dispatch<TaskAction>
   criarNovaTask: () => void
   handleChange: (e: ChangeEvent<HTMLInputElement>) => void
+  designarTask: () => void
+  getTask: () => void
+}
+export interface TaskDesign {
+  userId: string
+  equipeId: string
 }

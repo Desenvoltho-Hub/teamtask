@@ -16,6 +16,9 @@ export const EquipeSchema = new mongoose.Schema({
         type: mongoose.Types.ObjectId,
         ref: 'User',
         required: true
+    },
+    task: {
+        type: Array
     }
 }, {timestamps: true})
 export const Equipe = mongoose.model('Equipe', EquipeSchema)

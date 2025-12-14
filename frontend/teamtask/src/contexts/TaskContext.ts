@@ -5,5 +5,7 @@ export const TaskContext = createContext<TaskContextType>({
     state: taskInitialState,
     dispatch: () => {},
     criarNovaTask: () => {},
-    handleChange: () => {}
+    handleChange: () => {},
+    designarTask: () => {},
+    getTask: () => {}
 })
