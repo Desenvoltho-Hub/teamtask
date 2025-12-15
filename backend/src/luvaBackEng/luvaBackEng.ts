@@ -1,15 +1,32 @@
 import { calcularPrazo } from "./submotoresRN/calcularPrazo.js"
+import { sanitizador } from "./submotoresRN/sanitizador.js"
 
 export const luvaBackEng = (action: string, input: any) => {
-    //! Listener
-    const listener = {
-        action,
-        input
+
+    console.log(action, input)
+    let valor: any
+    const get = () => {
+        return valor
     }
-    switch(action){
+    const set = (novoValor: any) => {
+        valor = novoValor
+    }
+    //! Listener
+    const actionListener = get()
+   
+        
+        
+    
+    //! Actions
+    switch(actionListener){
         case "PRAZO":
-        calcularPrazo(listener.input)
+        calcularPrazo(input, (resultado) => {
+            set(resultado)
+        })
         break
     }
-
+    console.log(get())
+    return {
+        set
+    }
 }

@@ -1,5 +1,7 @@
 import type { Request, Response } from "express";
 import { addTask, addUserTask, taskGet} from "../services/taskServices.js";
+import { luvaBackEng } from "../luvaBackEng/luvaBackEng.js";
+import type { TaskType } from "../utils/type.js";
 
 //! Criar Task
 export const criarTask = async (req: Request, res: Response) => {
@@ -31,10 +33,21 @@ export const taskUser = async (req: Request, res: Response) => {
 export const getTask = async (req: Request, res: Response) => {
     try {
         const user = req.user.id
-       
-        const response = await taskGet(user)
+        
+        const response: any = await taskGet(user)
+
         res.status(200).json({message: 'Tarefas do usuário encontradas com sucesso!', response})
     } catch(err) {
+        res.status(400).json({err})
+    }
+}
+//! Prazo inteligente
+export const prazoInteligente = (req: Request, res: Response) => {
+    try {
+        const task = req.params.dataDeEntrega
+        luvaBackEng("PRAZO", task)
+        
+    } catch(err){
         res.status(400).json({err})
     }
 }

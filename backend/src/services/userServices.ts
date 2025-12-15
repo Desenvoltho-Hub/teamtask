@@ -33,3 +33,15 @@ export const userGetMe = async (user: UserType) => {
     throw err
   }
 }
+//! Login
+export const login = async (user: UserType) => {
+  if(!user.email || !user.password) {
+    throw new Error('Email e password são obrigatórios')
+  }
+  const email = user.email
+  const userExist =  User.findOne({email})
+  if(!userExist) {
+    throw new Error('Usuário não cadastrado')
+  }
+  return userExist
+}

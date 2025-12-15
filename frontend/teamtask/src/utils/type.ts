@@ -22,6 +22,7 @@ export interface UserContextType {
     handleChange: (e: ChangeEvent<HTMLInputElement>) => void
     cadastrar: () => void
     getMe: () => void
+    login: () => void
 }
 export const userInitialState: UserState = {
     user: {

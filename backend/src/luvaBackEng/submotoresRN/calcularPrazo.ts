@@ -1,14 +1,23 @@
+import { luvaBackEng } from "../luvaBackEng.js";
 
-import type { TaskType } from "../../utils/type.js";
-import type { Task } from "../../models/taskSchema.js";
+export const calcularPrazo = (payload: string, cb:(v: string) => void) => {
+  const luva = luvaBackEng('','')
+  const MS_DIA = 1000 * 60 * 60 * 24;
 
-export const calcularPrazo = (payload ) => {
-    const hoje = new Date() 
-    const normalizar = {
-        dia: hoje.getDate(),
-        mes: hoje.getMonth(),
-        ano: hoje.getFullYear()
-    }
-    const prazo = new Date() 
+  const normalizar = (d: Date) =>
+    new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime();
 
-}
+  const hoje = normalizar(new Date());
+  const prazo = normalizar(new Date(payload));
+  const diffDias = (prazo - hoje) / MS_DIA;
+  if(diffDias < 0) {
+    cb("Tarefa atrasada")
+  }
+  if(diffDias === 0) {
+    cb("Vence hoje")
+  }
+  if(diffDias > 0) {
+    cb("Em dia")
+  }
+  console.log(diffDias);
+};

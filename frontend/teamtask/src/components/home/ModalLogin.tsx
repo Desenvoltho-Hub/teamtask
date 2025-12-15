@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { UserContext } from "../../contexts/UserContext";
 
 function ModalLogin() {
-  const [openModal, setOpenModal] = useState();
+  const [openModal, setOpenModal] = useState<boolean>();
+  const {state, login, handleChange} = useContext(UserContext)
   const abrirModal = () => {
     setOpenModal(!openModal);
   };
@@ -16,12 +18,12 @@ function ModalLogin() {
             <legend className="fieldset-legend">Login</legend>
 
             <label className="label">Email</label>
-            <input type="email" className="input" placeholder="Email" />
+            <input type="email" className="input" placeholder="Email" name='email' onChange={(e) => handleChange(e)}/>
 
             <label className="label">Password</label>
-            <input type="password" className="input" placeholder="Password" />
+            <input type="password" className="input" placeholder="Password" name='password' onChange={(e) => handleChange(e)} />
 
-            <button className="btn btn-neutral mt-4">Login</button>
+            <button className="btn btn-neutral mt-4" onClick={() => login()}>Login</button>
             <button className="btn btn-primary" onClick={() => abrirModal()}>Fechar</button>
           </fieldset>
         </dialog>

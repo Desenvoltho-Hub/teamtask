@@ -1,5 +1,5 @@
 import { type Request, type Response } from "express";
-import { createUser, userGetMe } from "../services/userServices.js";
+import { createUser, login, userGetMe } from "../services/userServices.js";
 import jwt from "jsonwebtoken";
 import { env } from "../config/env.js";
 import type { UserType } from "../utils/type.js";
@@ -36,5 +36,20 @@ export const userGet = async (req:Request, res: Response) => {
     res.status(200).json({response})
   } catch(err){
     res.status(400).json({message: "Usuário não encontrado"})
+  }
+}
+//! userLogin
+
+export const userLogin = async (req: Request, res: Response) => {
+  try {
+    const user = req.body
+    const response = await login(user)
+    if(!env.JWT_SECRET) {
+      return console.log('JWT não encontrado')
+    }
+    const token = jwt.sign({id: response?.id}, env.JWT_SECRET, {expiresIn: "1d"})
+    res.status(200).cookie('authCookie', token, {maxAge: 20 * 60 * 60 * 1000, httpOnly: true, secure: false, sameSite: 'lax'}).json({message: "Login efetuado com sucesso!"})
+  } catch(err) {
+    res.status(400).json({message: 'Login não autorizado', err})
   }
 }

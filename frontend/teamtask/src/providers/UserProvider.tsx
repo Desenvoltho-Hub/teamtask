@@ -65,8 +65,24 @@ const getMe = async () => {
     console.log(err)
   }
 }
+const login = async() => {
+  try {
+    const response = await api.post('/user/login', {
+      email: state.user.email,
+      password: state.user.password
+    })
+    dispatch({ 
+      type: "CADASTRO",
+      user: response.data.response
+    })
+    alert('Login efetuado com sucesso')
+  } catch(err) {
+    alert('Erro ao fazer login')
+    console.log(err)
+  }
+}
   return (
-    <UserContext.Provider value={{ state, dispatch, handleChange, cadastrar, getMe }}>
+    <UserContext.Provider value={{ state, dispatch, handleChange, cadastrar, getMe, login }}>
       {children}
     </UserContext.Provider>
   );
