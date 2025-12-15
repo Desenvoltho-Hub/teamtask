@@ -3,7 +3,7 @@ import { sanitizador } from "./submotoresRN/sanitizador.js"
 
 export const luvaBackEng = (action: string, input: any) => {
 
-    console.log(action, input)
+   
     let valor: any
     const get = () => {
         return valor
@@ -11,22 +11,18 @@ export const luvaBackEng = (action: string, input: any) => {
     const set = (novoValor: any) => {
         valor = novoValor
     }
-    //! Listener
-    const actionListener = get()
    
-        
-        
-    
     //! Actions
-    switch(actionListener){
+    switch(action){
         case "PRAZO":
         calcularPrazo(input, (resultado) => {
             set(resultado)
         })
         break
     }
-    console.log(get())
+    
     return {
-        set
+        set,
+        get
     }
 }

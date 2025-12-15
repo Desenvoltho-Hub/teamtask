@@ -44,9 +44,10 @@ export const getTask = async (req: Request, res: Response) => {
 //! Prazo inteligente
 export const prazoInteligente = (req: Request, res: Response) => {
     try {
-        const task = req.params.dataDeEntrega
-        luvaBackEng("PRAZO", task)
-        
+        const task = req.params.data
+        const prazo = luvaBackEng("PRAZO", task)
+        const response = prazo.get()
+        res.status(200).json({response})
     } catch(err){
         res.status(400).json({err})
     }

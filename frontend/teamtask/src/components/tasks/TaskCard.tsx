@@ -1,7 +1,15 @@
 import { CheckCircle, Clock, Flag } from "lucide-react";
 import ModalDetalhesTask from "./ModalDetalhesTask";
+import type { Task } from "../../utils/type";
+import { useContext, useEffect } from "react";
+import { TaskContext } from "../../contexts/TaskContext";
+import { usePrazo } from "../../hooks/usePrazoTask";
 
-function TaskCard({title, description, dataDeEntrega, status}) {
+function TaskCard({title, description, dataDeEntrega, status, data}: Task) {
+  const {prazo, buscarPrazo} = usePrazo()
+  useEffect(() => {
+    buscarPrazo(data)
+  }, [])
   return (
     <div className="p-6 bg-base-200 rounded-2xl shadow-sm hover:shadow-md transition cursor-pointer">
       <div className="flex justify-between items-center mb-3">
@@ -13,7 +21,7 @@ function TaskCard({title, description, dataDeEntrega, status}) {
         {description}
       </p>
 
-          Prazo:
+         <span>Prazo: {prazo}</span>
       <div className="flex justify-between items-center text-sm">
         <div className="flex items-center gap-2">
           <Clock size={16} />

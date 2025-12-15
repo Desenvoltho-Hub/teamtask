@@ -7,7 +7,7 @@ export const addTask = async({data, creator}: any) => {
         if(!data){
             throw new Error('Dados inválidos')
         }
-        console.log(data)
+       
         const response = await Task.create({
             title: data.title,
             description: data.description,
@@ -42,7 +42,7 @@ export const addUserTask = async ({user, task}: any) => {
 }
 //! Task get 
 export const taskGet = async (user: UserType) => {
-    console.log(user)
+    
     try {
         if(!user) {
             throw new Error('Usuário inválido')

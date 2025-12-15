@@ -10,14 +10,14 @@ export const calcularPrazo = (payload: string, cb:(v: string) => void) => {
   const hoje = normalizar(new Date());
   const prazo = normalizar(new Date(payload));
   const diffDias = (prazo - hoje) / MS_DIA;
-  if(diffDias < 0) {
+  if(diffDias < -1) {
     cb("Tarefa atrasada")
   }
-  if(diffDias === 0) {
+  if(diffDias === -1) {
     cb("Vence hoje")
   }
-  if(diffDias > 0) {
+  if(diffDias >= 0) {
     cb("Em dia")
-  }
-  console.log(diffDias);
+  };
+  
 };

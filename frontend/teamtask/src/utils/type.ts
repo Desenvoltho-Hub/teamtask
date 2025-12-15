@@ -23,6 +23,7 @@ export interface UserContextType {
     cadastrar: () => void
     getMe: () => void
     login: () => void
+    
 }
 export const userInitialState: UserState = {
     user: {
@@ -91,11 +92,12 @@ export interface Task {
   isCompleted: boolean
   
   equipe: string
+  prazo: string
 }
 export interface TaskState {
   task: Task[]
   novaTask: Task
-  userId: TaskDesign
+  prazo: string
 }
 export const taskInitialState: TaskState = {
   task: [],
@@ -107,9 +109,10 @@ export const taskInitialState: TaskState = {
     isCompleted: false,
     equipe: '',
     dataDeEntrega: '',
-    status: ''
-
+    status: '',
+    prazo: ''
   },
+  prazo: ''
  
 }
 export type TaskAction = {
@@ -125,6 +128,9 @@ export type TaskAction = {
   type: 'DESIGNAR_TASK'
   userId: TaskDesign
 
+} | {
+  type: 'PRAZO'
+  prazo: string
 }
 export interface TaskContextType {
   state: TaskState
@@ -133,6 +139,7 @@ export interface TaskContextType {
   handleChange: (e: ChangeEvent<HTMLInputElement>) => void
   designarTask: () => void
   getTask: () => void
+  prazoInteligente: (prazo: string) => void
 }
 export interface TaskDesign {
   userId: string

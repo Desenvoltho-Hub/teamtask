@@ -14,7 +14,7 @@ export const TaskProvider = ({ children }: PropsWithChildren) => {
       case "TASK": {
         return {
           ...state,
-          task: [...state.task, ...action.task],
+          task: action.task,
           novaTask: {
             title: "",
             description: "",
@@ -22,6 +22,7 @@ export const TaskProvider = ({ children }: PropsWithChildren) => {
             isCompleted: false,
             equipe: "",
             status: "",
+            prazo: ''
           },
         };
       }
@@ -39,6 +40,16 @@ export const TaskProvider = ({ children }: PropsWithChildren) => {
                 userId: action.userId
             }
         }
+        case "PRAZO": {
+          return {
+            ...state,
+            prazo: action.prazo
+            
+          }
+        }
+        
+        default:
+          return state
     }
   };
   const [state, dispatch] = useReducer(reducer, taskInitialState);
@@ -81,10 +92,23 @@ export const TaskProvider = ({ children }: PropsWithChildren) => {
         console.log(err)
     }
   }
-  
+  //! Prazo inteligente
+    const prazoInteligente = async(prazo: string) => {
+      try {
+        const response = await api.get(`/task/prazo/${prazo}` )
+        dispatch({
+          type: "PRAZO",
+          prazo: response.data.response
+        })
+        console.log(state.prazo)
+      } catch(err){
+        console.log(err)
+      }
+
+    }
   return (
     <TaskContext.Provider
-      value={{ state, dispatch, criarNovaTask, handleChange, getTask }}
+      value={{ state, dispatch, criarNovaTask, handleChange, getTask, prazoInteligente }}
     >
       {children}
     </TaskContext.Provider>
