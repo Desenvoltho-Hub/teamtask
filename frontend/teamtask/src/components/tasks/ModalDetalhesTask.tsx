@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 
 import { useEquipeTask } from "../../hooks/useEquipeTask";
 import type { Task } from "../../utils/type";
-import { TaskContext } from "../../contexts/TaskContext";
+
 
 function ModalDetalhesTask({title, _id, task, funcaoTask}: Task) {
   const [modal, setModal] = useState(false);
