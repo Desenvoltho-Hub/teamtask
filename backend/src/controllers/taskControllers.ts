@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import { addTask, addUserTask, taskGet} from "../services/taskServices.js";
+import { addTask, addUserTask, equipeName, taskGet} from "../services/taskServices.js";
 import { luvaBackEng } from "../luvaBackEng/luvaBackEng.js";
 import type { TaskType } from "../utils/type.js";
 
@@ -49,6 +49,25 @@ export const prazoInteligente = (req: Request, res: Response) => {
         const response = prazo.get()
         res.status(200).json({response})
     } catch(err){
+        res.status(400).json({err})
+    }
+}
+//! Nome da equipe
+export const nomeDaEquipe = async (req: Request, res: Response) => {
+    try {
+        const equipe: any = req.params.equipe
+        const response = await equipeName(equipe)
+        res.status(200).json({response})
+    } catch(err) {
+        res.status(400).json({err})
+    }
+}
+//! Designar funcao
+export const designarFuncao = async (req: Request, res: Response) => {
+    try {
+       
+        const funcao = req.body.funcao
+    } catch(err) {
         res.status(400).json({err})
     }
 }

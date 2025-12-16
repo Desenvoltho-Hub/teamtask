@@ -58,6 +58,7 @@ export const equipeInitialState: EquipeState = {
     description: '',
     members: [],
     creator: ''
+  
   }
 }
 
@@ -73,6 +74,7 @@ export type EquipeAction =
   | { type: "CRIAR_EQUIPE"; equipe: Equipe }       
   | { type: "SET_EQUIPES"; equipe: Equipe[] }    
   | { type: "INPUT"; name: keyof Equipe; value: string } 
+  
 
   export interface Card {
   equipeId: string
@@ -98,9 +100,11 @@ export interface TaskState {
   task: Task[]
   novaTask: Task
   prazo: string
+  funcao: []
 }
 export const taskInitialState: TaskState = {
   task: [],
+  funcao: [],
     novaTask: {
       _id: '',
     title: '',
@@ -118,15 +122,13 @@ export const taskInitialState: TaskState = {
 export type TaskAction = {
   type: 'TASK',
   task: Task[],
-  
-
 } | {
   type: 'INPUT',
   name: string,
   value: string
 } | { 
   type: 'DESIGNAR_TASK'
-  userId: TaskDesign
+  funcao: TaskDesign
 
 } | {
   type: 'PRAZO'
@@ -137,11 +139,12 @@ export interface TaskContextType {
   dispatch: Dispatch<TaskAction>
   criarNovaTask: () => void
   handleChange: (e: ChangeEvent<HTMLInputElement>) => void
-  designarTask: () => void
+  designarFuncao: () => void
   getTask: () => void
   prazoInteligente: (prazo: string) => void
 }
 export interface TaskDesign {
   userId: string
   equipeId: string
+  funcao: string
 }

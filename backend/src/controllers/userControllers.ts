@@ -53,3 +53,12 @@ export const userLogin = async (req: Request, res: Response) => {
     res.status(400).json({message: 'Login não autorizado', err})
   }
 }
+//! User Task
+
+export const userTask = async(req: Request, res: Response) => {
+  try{
+    
+  } catch(err) {
+    res.status(400).json({err})
+  }
+}

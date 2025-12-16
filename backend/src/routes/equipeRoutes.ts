@@ -8,4 +8,5 @@ router.post("/criar", verifyAuth, equipeCreate);
 router.get('/equipes', verifyAuth, getEquipesUsuario)
 router.delete('/delete/:id', verifyAuth, verifyCreator, deletarEquipe)
 router.put('/addmembro/:id', verifyAuth, verifyCreator, adicionarMembro)
+router.patch('/:task/:id', verifyAuth)
 export default router;

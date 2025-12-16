@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { monitorEventLoopDelay } from "perf_hooks";
 
 export const EquipeSchema = new mongoose.Schema({
     name: {
@@ -18,7 +19,10 @@ export const EquipeSchema = new mongoose.Schema({
         required: true
     },
     task: {
-        type: Array
+        type: [mongoose.Types.ObjectId]
+    },
+    funcao: {
+        type: [String]
     }
 }, {timestamps: true})
 export const Equipe = mongoose.model('Equipe', EquipeSchema)

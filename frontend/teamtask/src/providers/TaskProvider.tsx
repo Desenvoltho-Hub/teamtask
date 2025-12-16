@@ -1,6 +1,7 @@
 import { useReducer, type ChangeEvent, type PropsWithChildren } from "react";
 import {
   taskInitialState,
+  type Task,
   type TaskAction,
   type TaskDesign,
   type TaskState,
@@ -106,9 +107,23 @@ export const TaskProvider = ({ children }: PropsWithChildren) => {
       }
 
     }
+    //! Designar Task
+    const designarFuncao = async (id: string, task: string) => {
+      try {
+        const response = await api.post(`/funcao/${id}/${task}`, {
+          funcao: state.funcao
+        })
+        dispatch({
+          type: "DESIGNAR_TASK",
+          funcao: response.data.response
+        })
+      } catch(err) {
+        console.log(err)
+      }
+    }
   return (
     <TaskContext.Provider
-      value={{ state, dispatch, criarNovaTask, handleChange, getTask, prazoInteligente }}
+      value={{ state, dispatch, criarNovaTask, handleChange, getTask, prazoInteligente, designarFuncao }}
     >
       {children}
     </TaskContext.Provider>

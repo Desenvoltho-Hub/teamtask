@@ -49,7 +49,7 @@ export const deleteEquipe = async (equipe: EquipeType) => {
     throw err;
   }
 };
-//! Acionar membro
+//! Adicionar membro
 export const addMembro = async ({equipeId, email}: any) => {
   try {
     const userId: any = await User.findOne({email})
@@ -63,3 +63,8 @@ export const addMembro = async ({equipeId, email}: any) => {
     throw err;
   }
 };
+//! Equipe get 
+export const equipeGet = async (id: string) => {
+  const response = Equipe.findById(id).populate("members", "name")
+  return response
+}

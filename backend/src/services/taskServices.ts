@@ -1,3 +1,4 @@
+import { Equipe } from "../models/equipeSchema.js";
 import { Task } from "../models/taskSchema.js";
 import { User } from "../models/userModel.js";
 import type { TaskType, UserType } from "../utils/type.js";
@@ -16,8 +17,13 @@ export const addTask = async({data, creator}: any) => {
             isCompleted: data.isCompleted,
             equipe: data.equipe,
             creator: creator,
-            participants: creator
-        })
+            participants: creator,
+            funcao: {
+                title: data.titleFuncao,
+                user: data.user,
+                
+            }
+         })
         return response
     } catch(err) {
         throw err
@@ -41,7 +47,7 @@ export const addUserTask = async ({user, task}: any) => {
     }
 }
 //! Task get 
-export const taskGet = async (user: UserType) => {
+export const taskGet = async (user: string) => {
     
     try {
         if(!user) {
@@ -52,5 +58,14 @@ export const taskGet = async (user: UserType) => {
 
     } catch(err) {
 
+    }
+}
+//! Nome da equipe
+export const equipeName = async (equipe: string) => {
+    try {
+        const response = await Equipe.findById(equipe).populate("members", "name")
+        return response
+    } catch(err){
+        throw err
     }
 }

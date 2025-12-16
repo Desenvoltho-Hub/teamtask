@@ -18,6 +18,7 @@ function TasksList() {
       key={t._id}
       data={t.dataDeEntrega}
       prazo={t.prazo}
+  
       />
       ))}
      

@@ -1,15 +1,15 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { TaskContext } from "../../contexts/TaskContext";
+import type { Task } from "../../utils/type";
+import { useEquipeTask } from "../../hooks/useEquipeTask";
 
-function ModalDetalhesEquipe() {
+function ModalDetalhesEquipe({eqp, title}) {
+  const {equipe, buscarEquipe} = useEquipeTask('')
   const [openModal, setOpenModal] = useState(false);
-  const abrirModal = () => setOpenModal(!openModal);
-
-  const membros = [
-    { id: 1, name: "Cy Ganderton", job: "Quality Control Specialist", status: "Ativo" },
-    { id: 2, name: "Hart Hagerty", job: "Desktop Support Technician", status: "Offline" },
-    { id: 3, name: "Brice Swyre", job: "Tax Accountant", status: "Ativo" },
-  ];
-
+  const abrirModal = () => setOpenModal(!openModal)
+useEffect(() => {
+  buscarEquipe(eqp)
+}, [])
   return (
     <>
       <button className="btn btn-primary" onClick={abrirModal}>
@@ -23,8 +23,13 @@ function ModalDetalhesEquipe() {
             {/* Cabeçalho */}
             <div className="flex justify-between items-center p-5 border-b border-base-content/10">
               <div>
-                <h1 className="text-3xl md:text-4xl font-bold">Equipe XYZ</h1>
-                <p className="text-base-content/70">Detalhes e membros da equipe</p>
+                {!equipe ? ( 
+                  <h1>Carregando...</h1>
+                ) : (
+
+                <h1 className="text-3xl md:text-4xl font-bold">{equipe?.name}</h1>
+                )}
+                <p className="text-base-content/70">Detalhes e participantes da task: <strong>{title}</strong></p>
               </div>
               <button
                 className="btn btn-ghost text-3xl hover:bg-base-300"
@@ -47,25 +52,27 @@ function ModalDetalhesEquipe() {
                   </tr>
                 </thead>
                 <tbody>
-                  {membros.map((m, idx) => (
-                    <tr key={m.id}>
-                      <th>{idx + 1}</th>
+              
+                    <tr >
+                     
+                      <th></th>
                       <td className="flex items-center gap-2">
-                        <div className="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center">
-                          {m.name[0]}
-                        </div>
-                        {m.name}
+                       
+                      ae
+                       
                       </td>
-                      <td className="break-words max-w-[120px] md:max-w-full">{m.job}</td>
+                      <td className="break-words max-w-[120px] md:max-w-full">
+
+                      </td>
                       <td>
                       
                       </td>
                       <td className="flex flex-col md:flex-row gap-2 justify-center">
-                        <button className="btn btn-sm btn-info">Ver Tasks</button>
+                       
                         <button className="btn btn-sm btn-warning">Remover</button>
                       </td>
                     </tr>
-                  ))}
+                  
                 </tbody>
               </table>
             </div>

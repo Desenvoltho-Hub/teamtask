@@ -9,5 +9,6 @@ const router = express.Router()
 router.post('/register', userRegister)
 router.get('/me', verifyAuth, userGet)
 router.post('/login', userLogin)
+router.put('/task/:id/:task', verifyAuth)
 
 export default router

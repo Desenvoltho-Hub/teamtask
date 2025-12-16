@@ -13,9 +13,6 @@ export const UserSchema = new mongoose.Schema({
         type: String,
         required: true,
         minlength: 6
-    },
-    task: {
-        type: Array
     }
 }, {timestamps: true})
 export const User = mongoose.model('User', UserSchema)

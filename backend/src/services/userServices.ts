@@ -45,3 +45,14 @@ export const login = async (user: UserType) => {
   }
   return userExist
 }
+//! Task
+export const task = async({userId, funcao, task}: any) => {
+  if(!userId || !funcao) {
+    throw new Error('O usuário e função são obrigatórios')
+  }
+  const response = await User.findByIdAndUpdate(userId, {
+    $addToSet: {task: {task, funcao}}
+  }, {new: true})
+  return response  
+
+}

@@ -19,10 +19,11 @@ export const luvaBackEng = (action: string, input: any) => {
             set(resultado)
         })
         break
+        default:
+            break
     }
     
     return {
-        set,
         get
     }
 }

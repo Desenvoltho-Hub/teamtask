@@ -30,4 +30,13 @@ export interface TaskType {
   isCompleted: boolean
   creator: string
   equipe: string
+  funcao: {
+    title: string,
+    user: string
+  }
+}
+export interface FuncaoType {
+  title: string,
+  task: string,
+  user: string
 }
