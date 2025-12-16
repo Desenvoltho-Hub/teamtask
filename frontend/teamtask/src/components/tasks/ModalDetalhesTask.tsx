@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 
 import { useEquipeTask } from "../../hooks/useEquipeTask";
-import type { Equipe, Task } from "../../utils/type";
+import type { Task } from "../../utils/type";
 
-function ModalDetalhesTask({title, _id}: Task) {
+function ModalDetalhesTask({title, _id, task}: Task) {
   const [modal, setModal] = useState(false);
-  const {equipe, buscarEquipe }= useEquipeTask()
+  const [membro, setMembro] = useState('')
+  const [funcao, setFuncao] = useState('')
+  const {equipe, buscarEquipe, designarFuncao  }= useEquipeTask()
   const abrirModal = () => setModal(prev => !prev);
   useEffect(() => {
     buscarEquipe(_id)
@@ -47,28 +49,29 @@ function ModalDetalhesTask({title, _id}: Task) {
                   <label className="label font-semibold">
                     Membros
                   </label>
-                  <select className="select select-bordered w-full">
+                  <select className="select select-bordered w-full" onChange={(e) => setMembro(e.target.value)}>
                     <option disabled selected>
                       Escolher membro
                     </option>
                     {equipe?.members.map(m => (
-                      <option value="">{m.name}</option>
+                      <option value={m._id}>{m.name}</option>
                     ))}
                   </select>
                 </fieldset>
 
                 <fieldset className="space-y-2">
-                  <label className="label font-semibold">
+                  <label className="label font-semibold" >
                     Função
                   </label>
                   <input
                     type="text"
                     placeholder="Ex: Desenvolvedor, Designer..."
                     className="input input-bordered w-full"
+                    onChange={(e) => setFuncao(e.target.value)}
                   />
                 </fieldset>
               </div>
-
+              {task}
               {/* TABLE */}
               <div className="overflow-x-auto rounded-xl border border-base-content/10">
                 <table className="table table-zebra">
@@ -124,9 +127,10 @@ function ModalDetalhesTask({title, _id}: Task) {
               <button className="btn btn-neutral" onClick={abrirModal}>
                 Fechar
               </button>
-              <button className="btn btn-primary">
+              <button className="btn btn-primary" onClick={() => designarFuncao(task, funcao, membro)}>
                 Salvar alterações
               </button>
+            
             </div>
 
           </div>

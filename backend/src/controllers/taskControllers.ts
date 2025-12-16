@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import { addTask, addUserTask, equipeName, taskGet} from "../services/taskServices.js";
+import { addFuncao, addTask, addUserTask, equipeName, taskGet} from "../services/taskServices.js";
 import { luvaBackEng } from "../luvaBackEng/luvaBackEng.js";
 import type { TaskType } from "../utils/type.js";
 
@@ -65,8 +65,12 @@ export const nomeDaEquipe = async (req: Request, res: Response) => {
 //! Designar funcao
 export const designarFuncao = async (req: Request, res: Response) => {
     try {
-       
-        const funcao = req.body.funcao
+        const task = req.params.id
+        const title = req.body.title
+        const user = req.body.user
+        console.log(title, task, user)
+        const response = addFuncao({title, task, user})
+        res.status(201).json({message: 'Função criada com sucesso!', response})
     } catch(err) {
         res.status(400).json({err})
     }

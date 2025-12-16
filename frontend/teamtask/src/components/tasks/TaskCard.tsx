@@ -7,7 +7,7 @@ import { usePrazo } from "../../hooks/usePrazoTask";
 import { useEffect } from "react";
 
 
-function TaskCard({title, description, dataDeEntrega,status, equipe, data, _id}: Task) {
+function TaskCard({title, description, dataDeEntrega,status, task,equipe, data, _id}: Task) {
   const {prazo, buscarPrazo} = usePrazo()
  
   useEffect(() => {
@@ -30,12 +30,13 @@ function TaskCard({title, description, dataDeEntrega,status, equipe, data, _id}:
           <Clock size={16} />
           <span>{dataDeEntrega}</span>
         </div>
-
+          Status: <br />{status}
         <div className="flex items-center gap-2">
           <CheckCircle size={16} className="text-success" />
           <ModalDetalhesTask 
           title={title}
           _id={_id}
+          task={task}
           />
         </div>
       </div>

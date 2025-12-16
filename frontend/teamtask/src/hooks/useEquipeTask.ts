@@ -6,10 +6,23 @@ export const useEquipeTask = () => {
     const buscarEquipe = async (eqp: string) => {
         const response = await api.get(`/task/equipe/${eqp}`)
         setEquipe(response.data.response)
-        console.log(response.data)
+        
+    }
+    const designarFuncao = async (id: string, title: string, user: string) => {
+        try {const response = await  api.put(`/task/designar/${id}`, {
+            user: user,
+            title: title
+        })
+        alert('Função adicionada com sucesso!')
+        return response
+    }catch (err) {
+       
+        console.log(err)
+    }
     }
     return {
         equipe,
-        buscarEquipe
+        buscarEquipe,
+        designarFuncao
     }
 }

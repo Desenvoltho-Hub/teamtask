@@ -69,3 +69,12 @@ export const equipeName = async (equipe: string) => {
         throw err
     }
 }
+export const addFuncao = async ({title, task, user}: any) => {
+    try {
+         const response = await Task.findByIdAndUpdate(task, {
+            $addToSet: {funcao: {title, user}}
+         }, {new: true})
+    } catch(err) {
+        throw err
+    } 
+}
