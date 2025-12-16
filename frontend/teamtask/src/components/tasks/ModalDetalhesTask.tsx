@@ -1,89 +1,134 @@
-import { useContext, useEffect, useState } from "react";
-import { TaskContext } from "../../contexts/TaskContext";
-import type { Task } from "../../utils/type";
-import { useEquipeTask } from "../../hooks/useEquipeTask";
+import { useEffect, useState } from "react";
 
-function ModalDetalhesEquipe({eqp, title}) {
-  const {equipe, buscarEquipe} = useEquipeTask('')
-  const [openModal, setOpenModal] = useState(false);
-  const abrirModal = () => setOpenModal(!openModal)
-useEffect(() => {
-  buscarEquipe(eqp)
-}, [])
+import { useEquipeTask } from "../../hooks/useEquipeTask";
+import type { Equipe, Task } from "../../utils/type";
+
+function ModalDetalhesTask({title, _id}: Task) {
+  const [modal, setModal] = useState(false);
+  const {equipe, buscarEquipe }= useEquipeTask()
+  const abrirModal = () => setModal(prev => !prev);
+  useEffect(() => {
+    buscarEquipe(_id)
+  }, [])
   return (
     <>
       <button className="btn btn-primary" onClick={abrirModal}>
         + Detalhes
       </button>
 
-      {openModal && (
-        <dialog open className="modal max-w-4xl w-full p-0">
-          <div className="bg-base-100 rounded-xl shadow-lg overflow-hidden flex flex-col">
+      {modal && (
+        <dialog open className="modal">
+          <div className="bg-base-100 w-full max-w-4xl rounded-2xl shadow-xl overflow-hidden">
 
-            {/* Cabeçalho */}
-            <div className="flex justify-between items-center p-5 border-b border-base-content/10">
+            {/* HEADER */}
+            <div className="flex items-center justify-between px-6 py-4 border-b border-base-content/10">
               <div>
-                {!equipe ? ( 
-                  <h1>Carregando...</h1>
-                ) : (
-
-                <h1 className="text-3xl md:text-4xl font-bold">{equipe?.name}</h1>
-                )}
-                <p className="text-base-content/70">Detalhes e participantes da task: <strong>{title}</strong></p>
+                <h1 className="text-2xl font-bold">Detalhes da Task: {title} </h1>
+                <p className="text-sm text-base-content/70">
+                  Gerencie membros e funções da equipe: <strong>{equipe?.name}</strong>
+                </p>
               </div>
+
               <button
-                className="btn btn-ghost text-3xl hover:bg-base-300"
                 onClick={abrirModal}
+                className="btn btn-ghost text-2xl"
               >
                 ✕
               </button>
             </div>
 
-            {/* Corpo */}
-            <div className="p-5 overflow-x-auto">
-              <table className="table w-full">
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Membro</th>
-                    <th>Função</th>
-                 
-                    <th className="text-center">Ações</th>
-                  </tr>
-                </thead>
-                <tbody>
-              
-                    <tr >
-                     
-                      <th></th>
-                      <td className="flex items-center gap-2">
-                       
-                      ae
-                       
-                      </td>
-                      <td className="break-words max-w-[120px] md:max-w-full">
+            {/* BODY */}
+            <div className="p-6 space-y-6">
 
-                      </td>
-                      <td>
-                      
-                      </td>
-                      <td className="flex flex-col md:flex-row gap-2 justify-center">
-                       
-                        <button className="btn btn-sm btn-warning">Remover</button>
+              {/* FORM */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                <fieldset className="space-y-2">
+                  <label className="label font-semibold">
+                    Membros
+                  </label>
+                  <select className="select select-bordered w-full">
+                    <option disabled selected>
+                      Escolher membro
+                    </option>
+                    {equipe?.members.map(m => (
+                      <option value="">{m.name}</option>
+                    ))}
+                  </select>
+                </fieldset>
+
+                <fieldset className="space-y-2">
+                  <label className="label font-semibold">
+                    Função
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Ex: Desenvolvedor, Designer..."
+                    className="input input-bordered w-full"
+                  />
+                </fieldset>
+              </div>
+
+              {/* TABLE */}
+              <div className="overflow-x-auto rounded-xl border border-base-content/10">
+                <table className="table table-zebra">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Membro</th>
+                      <th>Função</th>
+                      <th className="text-center">Ações</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr>
+                      <th>1</th>
+                      <td>Cy Ganderton</td>
+                      <td>Quality Control</td>
+                      <td className="text-center">
+                        <button className="btn btn-xs btn-warning">
+                          Remover
+                        </button>
                       </td>
                     </tr>
-                  
-                </tbody>
-              </table>
+
+                    <tr>
+                      <th>2</th>
+                      <td>Hart Hagerty</td>
+                      <td>Desktop Support</td>
+                      <td className="text-center">
+                        <button className="btn btn-xs btn-warning">
+                          Remover
+                        </button>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <th>3</th>
+                      <td>Brice Swyre</td>
+                      <td>Tax Accountant</td>
+                      <td className="text-center">
+                        <button className="btn btn-xs btn-warning">
+                          Remover
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
 
-            {/* Rodapé */}
-            <div className="flex flex-col md:flex-row justify-end p-5 border-t border-base-content/10 gap-2">
+            {/* FOOTER */}
+            <div className="flex justify-end gap-2 px-6 py-4 border-t border-base-content/10">
               <button className="btn btn-neutral" onClick={abrirModal}>
                 Fechar
               </button>
-              <button className="btn btn-primary">Adicionar Membro</button>
+              <button className="btn btn-primary">
+                Salvar alterações
+              </button>
             </div>
+
           </div>
         </dialog>
       )}
@@ -91,4 +136,4 @@ useEffect(() => {
   );
 }
 
-export default ModalDetalhesEquipe;
+export default ModalDetalhesTask;

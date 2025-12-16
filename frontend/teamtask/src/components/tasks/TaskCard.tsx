@@ -1,14 +1,15 @@
 import { CheckCircle, Clock, Flag } from "lucide-react";
 import ModalDetalhesTask from "./ModalDetalhesTask";
 import type { Task } from "../../utils/type";
-import { useContext, useEffect } from "react";
+
 
 import { usePrazo } from "../../hooks/usePrazoTask";
-import { TaskContext } from "../../contexts/TaskContext";
+import { useEffect } from "react";
 
-function TaskCard({title, description, dataDeEntrega, status, equipe, data}: Task) {
+
+function TaskCard({title, description, dataDeEntrega,status, equipe, data, _id}: Task) {
   const {prazo, buscarPrazo} = usePrazo()
-  const {state} = useContext(TaskContext)
+ 
   useEffect(() => {
     buscarPrazo(data)
   }, [])
@@ -32,14 +33,10 @@ function TaskCard({title, description, dataDeEntrega, status, equipe, data}: Tas
 
         <div className="flex items-center gap-2">
           <CheckCircle size={16} className="text-success" />
-          <span>{status}</span>
-          {state.task?.map((t) => (
-
-          <ModalDetalhesTask
-          eqp={t.equipe}
-          title={t.title}
+          <ModalDetalhesTask 
+          title={title}
+          _id={_id}
           />
-          ))}
         </div>
       </div>
     </div>

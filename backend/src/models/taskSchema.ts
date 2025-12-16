@@ -28,7 +28,7 @@ export const TaskSchema = new mongoose.Schema({
         required: true
     },
     dataDeEntrega: {
-        type: Date,
+        type: String,
         required: true
     },
     equipe: {
