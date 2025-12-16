@@ -20,6 +20,7 @@ function TasksList() {
       prazo={t.prazo}
       _id={t.equipe}
         task={t._id}
+        funcaoTask={t.funcao}
       />
       ))}
      

@@ -1,15 +1,17 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import { useEquipeTask } from "../../hooks/useEquipeTask";
 import type { Task } from "../../utils/type";
+import { TaskContext } from "../../contexts/TaskContext";
 
-function ModalDetalhesTask({title, _id, task}: Task) {
+function ModalDetalhesTask({title, _id, task, funcaoTask}: Task) {
   const [modal, setModal] = useState(false);
   const [membro, setMembro] = useState('')
   const [funcao, setFuncao] = useState('')
   const {equipe, buscarEquipe, designarFuncao  }= useEquipeTask()
   const abrirModal = () => setModal(prev => !prev);
   useEffect(() => {
+   
     buscarEquipe(_id)
   }, [])
   return (
@@ -58,7 +60,7 @@ function ModalDetalhesTask({title, _id, task}: Task) {
                     ))}
                   </select>
                 </fieldset>
-
+                    
                 <fieldset className="space-y-2">
                   <label className="label font-semibold" >
                     Função
@@ -71,24 +73,25 @@ function ModalDetalhesTask({title, _id, task}: Task) {
                   />
                 </fieldset>
               </div>
-              {task}
+            
               {/* TABLE */}
               <div className="overflow-x-auto rounded-xl border border-base-content/10">
                 <table className="table table-zebra">
                   <thead>
                     <tr>
-                      <th>#</th>
+                     
                       <th>Membro</th>
                       <th>Função</th>
                       <th className="text-center">Ações</th>
                     </tr>
                   </thead>
-
-                  <tbody>
-                    <tr>
-                      <th>1</th>
-                      <td>Cy Ganderton</td>
-                      <td>Quality Control</td>
+ {funcaoTask.map(f => (
+                        <tbody>
+                    
+                      <tr>
+                      
+                      <td>{f.user}</td>
+                      <td>{f.title}</td>
                       <td className="text-center">
                         <button className="btn btn-xs btn-warning">
                           Remover
@@ -96,28 +99,10 @@ function ModalDetalhesTask({title, _id, task}: Task) {
                       </td>
                     </tr>
 
-                    <tr>
-                      <th>2</th>
-                      <td>Hart Hagerty</td>
-                      <td>Desktop Support</td>
-                      <td className="text-center">
-                        <button className="btn btn-xs btn-warning">
-                          Remover
-                        </button>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <th>3</th>
-                      <td>Brice Swyre</td>
-                      <td>Tax Accountant</td>
-                      <td className="text-center">
-                        <button className="btn btn-xs btn-warning">
-                          Remover
-                        </button>
-                      </td>
-                    </tr>
+                   
                   </tbody>
+                      ))}
+                  
                 </table>
               </div>
             </div>

@@ -7,7 +7,7 @@ import { usePrazo } from "../../hooks/usePrazoTask";
 import { useEffect } from "react";
 
 
-function TaskCard({title, description, dataDeEntrega,status, task,equipe, data, _id}: Task) {
+function TaskCard({title, description, dataDeEntrega,status, task,equipe, data,  funcaoTask, _id}: Task) {
   const {prazo, buscarPrazo} = usePrazo()
  
   useEffect(() => {
@@ -37,6 +37,8 @@ function TaskCard({title, description, dataDeEntrega,status, task,equipe, data, 
           title={title}
           _id={_id}
           task={task}
+          funcaoTask={funcaoTask}
+       
           />
         </div>
       </div>

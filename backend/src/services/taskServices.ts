@@ -63,7 +63,7 @@ export const taskGet = async (user: string) => {
 //! Nome da equipe
 export const equipeName = async (equipe: string) => {
     try {
-        const response = await Equipe.findById(equipe).populate("members", "name")
+        const response = await Equipe.findById(equipe).populate("members", "name").populate("funcao", "title, user")
         return response
     } catch(err){
         throw err
