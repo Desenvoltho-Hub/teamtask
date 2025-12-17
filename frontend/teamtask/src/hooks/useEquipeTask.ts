@@ -8,15 +8,16 @@ export const useEquipeTask = () => {
         setEquipe(response.data.response)
         
     }
-    const designarFuncao = async (id: string, title: string, user: string) => {
-        try {const response = await  api.put(`/task/designar/${id}`, {
-            user: user,
+    const designarFuncao = async (id: string, user: string, title: string) => {
+        try {const response = await  api.post(`/funcao/${id}/${user}`, {
+            
             title: title
         })
+        console.log(id, title, user )
         alert('Função adicionada com sucesso!')
         return response
     }catch (err) {
-       
+       console.log("AQUI", user)
         console.log(err)
     }
     }

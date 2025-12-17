@@ -6,7 +6,13 @@ export const FuncaoSchema = new mongoose.Schema({
         
     },
     user: {
-        type: mongoose.Types.ObjectId
+        type: mongoose.Types.ObjectId,
+        ref: "User"
+    },
+    task: {
+        type: mongoose.Types.ObjectId,
+        ref: "Task"
     }
+
 }, {timestamps: true})
 export const Funcao = mongoose.model('Funcao', FuncaoSchema)

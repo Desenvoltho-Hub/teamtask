@@ -112,7 +112,7 @@ function ModalDetalhesTask({title, _id, task, funcaoTask}: Task) {
               <button className="btn btn-neutral" onClick={abrirModal}>
                 Fechar
               </button>
-              <button className="btn btn-primary" onClick={() => designarFuncao(task, funcao, membro)}>
+              <button className="btn btn-primary" onClick={() => designarFuncao(task,  membro, funcao)}>
                 Salvar alterações
               </button>
             
