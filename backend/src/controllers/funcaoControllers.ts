@@ -1,10 +1,13 @@
 import type { Request, Response } from "express"
 import { Funcao } from "../models/funcaoSchema.js"
-import { funcaoCreate } from "../services/funcaoServices.js"
+import { funcao, funcaoCreate } from "../services/funcaoServices.js"
 
 //! Get funcao por task
 export const getFuncao = async (req: Request, res: Response) => {
     try {
+        const id: any = req.params.id
+        const response = await funcao(id)
+        res.status(200).json({message: "Função achada com sucesso!", response})
     } catch(err) {
         res.status(400).json({err})
     }

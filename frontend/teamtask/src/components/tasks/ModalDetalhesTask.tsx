@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 
 import { useEquipeTask } from "../../hooks/useEquipeTask";
 import type { Task } from "../../utils/type";
+import { useFuncao } from "../../hooks/useFuncao";
 
 
 function ModalDetalhesTask({title, _id, task, funcaoTask}: Task) {
@@ -9,9 +10,10 @@ function ModalDetalhesTask({title, _id, task, funcaoTask}: Task) {
   const [membro, setMembro] = useState('')
   const [funcao, setFuncao] = useState('')
   const {equipe, buscarEquipe, designarFuncao  }= useEquipeTask()
+  const {buscarFuncao, funcaoGet } = useFuncao()
   const abrirModal = () => setModal(prev => !prev);
   useEffect(() => {
-   
+   buscarFuncao(task)
     buscarEquipe(_id)
   }, [])
   return (
@@ -85,12 +87,12 @@ function ModalDetalhesTask({title, _id, task, funcaoTask}: Task) {
                       <th className="text-center">Ações</th>
                     </tr>
                   </thead>
- {funcaoTask.map(f => (
+ {funcaoGet?.map(f => (
                         <tbody>
                     
                       <tr>
                       
-                      <td>{f.user}</td>
+                      <td>{f.user.name}</td>
                       <td>{f.title}</td>
                       <td className="text-center">
                         <button className="btn btn-xs btn-warning">
