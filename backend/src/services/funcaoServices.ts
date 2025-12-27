@@ -3,8 +3,8 @@ import { Funcao } from "../models/funcaoSchema.js"
 
 //! Funcao por task
 export const funcao = async (id: string) => {
-    console.log("SERVICE AQUI", id)
-       console.log('Task ID recebido no service:', `"${id}"`)
+  
+   
     if(!id) {
         throw new Error('Não foi possível achar o id da task')
     }
@@ -12,7 +12,7 @@ export const funcao = async (id: string) => {
     return response
 }
 export const funcaoCreate = async ({task, title, user}: {task: string, title: string, user: string}) => {
-    console.log("SERVICE AQUI", task, title, user )
+   
     if(!task || !title || !user) {
         throw new Error('Id da task, titulo e user são necessários para criar uma função!')
     }

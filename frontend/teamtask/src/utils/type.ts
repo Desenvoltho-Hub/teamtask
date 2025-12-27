@@ -148,3 +148,14 @@ export interface TaskDesign {
   equipeId: string
   funcao: string
 }
+
+export interface Funcao {
+  _id: string
+  title: string
+  user: {
+    _id: string
+    name: string
+    email?: string
+  }
+  equipe?: string
+}

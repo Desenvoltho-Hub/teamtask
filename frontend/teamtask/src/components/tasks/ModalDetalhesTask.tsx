@@ -4,18 +4,17 @@ import { useEquipeTask } from "../../hooks/useEquipeTask";
 import type { Task } from "../../utils/type";
 import { useFuncao } from "../../hooks/useFuncao";
 
-
-function ModalDetalhesTask({title, _id, task, funcaoTask}: Task) {
+function ModalDetalhesTask({ title, _id, task, funcaoTask }: Task) {
   const [modal, setModal] = useState(false);
-  const [membro, setMembro] = useState('')
-  const [funcao, setFuncao] = useState('')
-  const {equipe, buscarEquipe, designarFuncao  }= useEquipeTask()
-  const {buscarFuncao, funcaoGet } = useFuncao()
-  const abrirModal = () => setModal(prev => !prev);
+  const [membro, setMembro] = useState("");
+  const [funcao, setFuncao] = useState("");
+  const { equipe, buscarEquipe, designarFuncao } = useEquipeTask();
+  const { buscarFuncao, funcaoGet } = useFuncao();
+  const abrirModal = () => setModal((prev) => !prev);
   useEffect(() => {
-   buscarFuncao(task)
-    buscarEquipe(_id)
-  }, [])
+    buscarFuncao(task);
+    buscarEquipe(_id);
+  }, []);
   return (
     <>
       <button className="btn btn-primary" onClick={abrirModal}>
@@ -25,48 +24,44 @@ function ModalDetalhesTask({title, _id, task, funcaoTask}: Task) {
       {modal && (
         <dialog open className="modal">
           <div className="bg-base-100 w-full max-w-4xl rounded-2xl shadow-xl overflow-hidden">
-
             {/* HEADER */}
             <div className="flex items-center justify-between px-6 py-4 border-b border-base-content/10">
               <div>
-                <h1 className="text-2xl font-bold">Detalhes da Task: {title} </h1>
+                <h1 className="text-2xl font-bold">
+                  Detalhes da Task: {title}{" "}
+                </h1>
                 <p className="text-sm text-base-content/70">
-                  Gerencie membros e funções da equipe: <strong>{equipe?.name}</strong>
+                  Gerencie membros e funções da equipe:{" "}
+                  <strong>{equipe?.name}</strong>
                 </p>
               </div>
 
-              <button
-                onClick={abrirModal}
-                className="btn btn-ghost text-2xl"
-              >
+              <button onClick={abrirModal} className="btn btn-ghost text-2xl">
                 ✕
               </button>
             </div>
 
             {/* BODY */}
             <div className="p-6 space-y-6">
-
               {/* FORM */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-
                 <fieldset className="space-y-2">
-                  <label className="label font-semibold">
-                    Membros
-                  </label>
-                  <select className="select select-bordered w-full" onChange={(e) => setMembro(e.target.value)}>
+                  <label className="label font-semibold">Membros</label>
+                  <select
+                    className="select select-bordered w-full"
+                    onChange={(e) => setMembro(e.target.value)}
+                  >
                     <option disabled selected>
                       Escolher membro
                     </option>
-                    {equipe?.members.map(m => (
+                    {equipe?.members?.map((m) => (
                       <option value={m._id}>{m.name}</option>
                     ))}
                   </select>
                 </fieldset>
-                    
+
                 <fieldset className="space-y-2">
-                  <label className="label font-semibold" >
-                    Função
-                  </label>
+                  <label className="label font-semibold">Função</label>
                   <input
                     type="text"
                     placeholder="Ex: Desenvolvedor, Designer..."
@@ -75,36 +70,30 @@ function ModalDetalhesTask({title, _id, task, funcaoTask}: Task) {
                   />
                 </fieldset>
               </div>
-            
+
               {/* TABLE */}
               <div className="overflow-x-auto rounded-xl border border-base-content/10">
                 <table className="table table-zebra">
                   <thead>
                     <tr>
-                     
                       <th>Membro</th>
                       <th>Função</th>
                       <th className="text-center">Ações</th>
                     </tr>
                   </thead>
- {funcaoGet?.map(f => (
-                        <tbody>
-                    
+                  {funcaoGet?.map((f) => (
+                    <tbody>
                       <tr>
-                      
-                      <td>{f.user.name}</td>
-                      <td>{f.title}</td>
-                      <td className="text-center">
-                        <button className="btn btn-xs btn-warning">
-                          Remover
-                        </button>
-                      </td>
-                    </tr>
-
-                   
-                  </tbody>
-                      ))}
-                  
+                        <td>{f.user.name}</td>
+                        <td>{f.title}</td>
+                        <td className="text-center">
+                          <button className="btn btn-xs btn-warning">
+                            Remover
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  ))}
                 </table>
               </div>
             </div>
@@ -114,12 +103,13 @@ function ModalDetalhesTask({title, _id, task, funcaoTask}: Task) {
               <button className="btn btn-neutral" onClick={abrirModal}>
                 Fechar
               </button>
-              <button className="btn btn-primary" onClick={() => designarFuncao(task,  membro, funcao)}>
+              <button
+                className="btn btn-primary"
+                onClick={() => designarFuncao(task, membro, funcao)}
+              >
                 Salvar alterações
               </button>
-            
             </div>
-
           </div>
         </dialog>
       )}
