@@ -1,6 +1,6 @@
 import type { Request, Response } from "express"
-import { Funcao } from "../models/funcaoSchema.js"
-import { funcao, funcaoCreate } from "../services/funcaoServices.js"
+
+import { funcao, funcaoCreate, removerFunc } from "../services/funcaoServices.js"
 
 //! Get funcao por task
 export const getFuncao = async (req: Request, res: Response) => {
@@ -22,6 +22,16 @@ export const criarFuncao = async (req:Request, res: Response) => {
         console.log(user)
         res.status(201).json({message: "Função criada com sucesso!", response})
     } catch(err){
+        res.status(400).json({err})
+    }
+}
+//! Remover Função
+export const removerFuncao = async (req: Request, res: Response) => {
+    try {
+        const id: any = req.params.id
+        const response = await removerFunc(id)
+        res.status(200).json({message: 'Função deletada com sucesso!'})
+    } catch (err) {
         res.status(400).json({err})
     }
 }

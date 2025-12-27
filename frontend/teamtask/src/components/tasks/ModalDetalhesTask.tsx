@@ -9,7 +9,7 @@ function ModalDetalhesTask({ title, _id, task, funcaoTask }: Task) {
   const [membro, setMembro] = useState("");
   const [funcao, setFuncao] = useState("");
   const { equipe, buscarEquipe, designarFuncao } = useEquipeTask();
-  const { buscarFuncao, funcaoGet } = useFuncao();
+  const { buscarFuncao, funcaoGet, deletarFuncao } = useFuncao();
   const abrirModal = () => setModal((prev) => !prev);
   useEffect(() => {
     buscarFuncao(task);
@@ -87,7 +87,7 @@ function ModalDetalhesTask({ title, _id, task, funcaoTask }: Task) {
                         <td>{f.user.name}</td>
                         <td>{f.title}</td>
                         <td className="text-center">
-                          <button className="btn btn-xs btn-warning">
+                          <button className="btn btn-xs btn-warning" onClick={() => deletarFuncao(f._id)}>
                             Remover
                           </button>
                         </td>

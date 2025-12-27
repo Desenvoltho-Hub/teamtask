@@ -75,3 +75,4 @@ export const designarFuncao = async (req: Request, res: Response) => {
         res.status(400).json({err})
     }
 }
+//! Remover função
