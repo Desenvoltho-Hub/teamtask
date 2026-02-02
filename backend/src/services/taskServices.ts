@@ -69,6 +69,7 @@ export const equipeName = async (equipe: string) => {
         throw err
     }
 }
+//! Adicionar função
 export const addFuncao = async ({title, task, user}: any) => {
     try {
          const response = await Task.findByIdAndUpdate(task, {
@@ -77,4 +78,8 @@ export const addFuncao = async ({title, task, user}: any) => {
     } catch(err) {
         throw err
     } 
+}
+//! Editar task
+export const editarTask = async (id) => {
+    
 }

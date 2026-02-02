@@ -3,6 +3,7 @@ import { EquipeContext } from "../../contexts/EquipeContext";
 import { useContext } from "react";
 import type { Card } from "../../utils/type";
 import AddMemberModal from "./AddMemberModal";
+import EditarEquipeModal from "./EditarEquipeModal"
 
 
 function TeamCard({name, equipeId, description, members}: Card) {
@@ -12,6 +13,7 @@ function TeamCard({name, equipeId, description, members}: Card) {
     <div className="p-6 rounded-2xl bg-base-200 shadow-sm hover:shadow-md transition">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-xl font-semibold">{name}</h2>
+      <EditarEquipeModal />
         <button className="btn btn-sm btn-error btn-circle" onClick={() => deletarEquipe(equipeId)}>
           <Trash size={18} />
         </button>

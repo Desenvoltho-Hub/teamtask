@@ -75,4 +75,13 @@ export const designarFuncao = async (req: Request, res: Response) => {
         res.status(400).json({err})
     }
 }
-//! Remover função
+//! Editar Task
+export const taskEdit = async(req: Request, res: Response) => {
+    try {
+        const data = req.body.data
+        const id = req.params.id
+        
+    } catch (err) {
+        res.status(400).json({err})
+    }
+}
