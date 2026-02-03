@@ -3,7 +3,8 @@ import ModalDetalhesTask from "./ModalDetalhesTask";
 import type { Task } from "../../utils/type";
 
 import { usePrazo } from "../../hooks/usePrazoTask";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import ModalEdicaoTask from "./ModalEdicaoTask";
 
 function TaskCard({
   title,
@@ -39,12 +40,17 @@ function TaskCard({
         Status: <br />
         {status}
         <div className="flex items-center gap-2">
-          
-          <ModalDetalhesTask
+          <ModalDetalhesTask 
             title={title}
             _id={_id}
             task={task}
             funcaoTask={funcaoTask}
+          />
+          <ModalEdicaoTask
+            title={title}
+            description={description}
+            dataDeEntrega={dataDeEntrega}
+            status={status}
           />
         </div>
       </div>
