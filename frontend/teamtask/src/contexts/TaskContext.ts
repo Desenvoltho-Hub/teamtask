@@ -8,6 +8,7 @@ export const TaskContext = createContext<TaskContextType>({
     handleChange: () => {},
     designarFuncao: () => {},
     getTask: () => {},
-    prazoInteligente: () => {}
+    prazoInteligente: () => {},
+    editarTask: () => {}
 
 })

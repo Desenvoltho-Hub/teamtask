@@ -118,6 +118,22 @@ export const TaskProvider = ({ children }: PropsWithChildren) => {
       console.log(err);
     }
   };
+  //!Editar Task
+  const editarTask = async (id: string) => {
+    try {
+      await api.put(`/task/editar/${id}`, {
+        data: {
+          title: state.novaTask.title,
+          description: state.novaTask.description,
+          dataDeEntrega: state.novaTask.dataDeEntrega,
+          status: state.novaTask.status,
+          equipe: state.novaTask.equipe
+        }
+      })
+    } catch (err) {
+      console.log(err)
+    }
+  }
   return (
     <TaskContext.Provider
       value={{
@@ -128,6 +144,7 @@ export const TaskProvider = ({ children }: PropsWithChildren) => {
         getTask,
         prazoInteligente,
         designarFuncao,
+        editarTask
       }}
     >
       {children}

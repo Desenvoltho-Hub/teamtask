@@ -88,7 +88,7 @@ export const editarTask = async (id: string, data: TaskType) => {
         dataDeEntrega: data.dataDeEntrega,
         description: data.description,
         equipe: data.equipe,
-
+        
       },
     }, { new: true });
     return response
