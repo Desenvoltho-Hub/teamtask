@@ -39,7 +39,7 @@ function Footer() {
       </div>
 
       <div className="mt-10 border-t border-base-300 pt-5 text-center text-base-content/60">
-        © 2025 TeamTask. Todos os direitos reservados.
+        © 2026 TeamTask. Todos os direitos reservados.
       </div>
     </footer>
   );

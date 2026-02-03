@@ -17,7 +17,7 @@ function NavBar() {
         <img src="/logoteamtasker.png" alt="Logo" className="w-28" />
 
     
-        <h1 className="text-4xl md:text-5xl text-primary font-extrabold border-l-4 rounded-2xl p-5 shadow-lg">
+        <h1 className="text-4xl md:text-xl text-primary font-extrabold border-l-4 rounded-2xl p-5 shadow-lg">
           {state.user?.name?.toUpperCase() || "USUÁRIO"}
         </h1>
 
