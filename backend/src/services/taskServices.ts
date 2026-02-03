@@ -80,6 +80,6 @@ export const addFuncao = async ({title, task, user}: any) => {
     } 
 }
 //! Editar task
-export const editarTask = async (id) => {
+export const editarTask = async (id: string) => {
     
 }

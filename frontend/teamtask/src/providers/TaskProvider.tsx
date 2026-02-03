@@ -23,7 +23,7 @@ export const TaskProvider = ({ children }: PropsWithChildren) => {
             isCompleted: false,
             equipe: "",
             status: "",
-            prazo: ''
+            prazo: "",
           },
         };
       }
@@ -32,25 +32,24 @@ export const TaskProvider = ({ children }: PropsWithChildren) => {
           ...state,
           novaTask: {
             ...state.novaTask,
-            [action.name]: action.value
-          }
+            [action.name]: action.value,
+          },
         };
-        case "DESIGNAR_TASK": {
-            return {
-                ...state,
-                userId: action.userId
-            }
-        }
-        case "PRAZO": {
-          return {
-            ...state,
-            prazo: action.prazo
-            
-          }
-        }
-        
-        default:
-          return state
+      case "DESIGNAR_TASK": {
+        return {
+          ...state,
+          userId: action.funcao,
+        };
+      }
+      case "PRAZO": {
+        return {
+          ...state,
+          prazo: action.prazo,
+        };
+      }
+
+      default:
+        return state;
     }
   };
   const [state, dispatch] = useReducer(reducer, taskInitialState);
@@ -70,7 +69,7 @@ export const TaskProvider = ({ children }: PropsWithChildren) => {
       });
       alert("Nova task criada com sucesso!");
     } catch (err) {
-        console.log(state.novaTask)
+      console.log(state.novaTask);
       console.log(err);
       alert("Erro ao criar nova task!");
     }
@@ -84,46 +83,52 @@ export const TaskProvider = ({ children }: PropsWithChildren) => {
   };
   const getTask = async () => {
     try {
-        const response = await api.get('/task/task')
-        dispatch({
-            type: "TASK",
-            task: response.data.response
-        })
-    } catch(err) {
-        console.log(err)
+      const response = await api.get("/task/task");
+      dispatch({
+        type: "TASK",
+        task: response.data.response,
+      });
+    } catch (err) {
+      console.log(err);
     }
-  }
+  };
   //! Prazo inteligente
-    const prazoInteligente = async(prazo: string) => {
-      try {
-        const response = await api.get(`/task/prazo/${prazo}` )
-        dispatch({
-          type: "PRAZO",
-          prazo: response.data.response
-        })
-        console.log(state.prazo)
-      } catch(err){
-        console.log(err)
-      }
-
+  const prazoInteligente = async (prazo: string) => {
+    try {
+      const response = await api.get(`/task/prazo/${prazo}`);
+      dispatch({
+        type: "PRAZO",
+        prazo: response.data.response,
+      });
+    } catch (err) {
+      console.log(err);
     }
-    //! Designar Task
-    const designarFuncao = async (id: string, task: string) => {
-      try {
-        const response = await api.post(`/funcao/${id}/${task}`, {
-          funcao: state.funcao
-        })
-        dispatch({
-          type: "DESIGNAR_TASK",
-          funcao: response.data.response
-        })
-      } catch(err) {
-        console.log(err)
-      }
+  };
+  //! Designar Task
+  const designarFuncao = async (id: string, task: string) => {
+    try {
+      const response = await api.post(`/funcao/${id}/${task}`, {
+        funcao: state.funcao,
+      });
+      dispatch({
+        type: "DESIGNAR_TASK",
+        funcao: response.data.response,
+      });
+    } catch (err) {
+      console.log(err);
     }
+  };
   return (
     <TaskContext.Provider
-      value={{ state, dispatch, criarNovaTask, handleChange, getTask, prazoInteligente, designarFuncao }}
+      value={{
+        state,
+        dispatch,
+        criarNovaTask,
+        handleChange,
+        getTask,
+        prazoInteligente,
+        designarFuncao,
+      }}
     >
       {children}
     </TaskContext.Provider>

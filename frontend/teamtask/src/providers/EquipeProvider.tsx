@@ -1,6 +1,11 @@
 import { useReducer, type ChangeEvent, type PropsWithChildren } from "react";
 import { EquipeContext } from "../contexts/EquipeContext";
-import { equipeInitialState, type Equipe, type EquipeAction, type EquipeState } from "../utils/type";
+import {
+  equipeInitialState,
+  type Equipe,
+  type EquipeAction,
+  type EquipeState,
+} from "../utils/type";
 import { api } from "../api/api";
 
 export const EquipeProvider = ({ children }: PropsWithChildren) => {
@@ -10,16 +15,23 @@ export const EquipeProvider = ({ children }: PropsWithChildren) => {
         return {
           ...state,
           equipe: [...state.equipe, action.equipe],
-          novaEquipe: { _id: '', name: '', description: '', members: [], creator: '' }         };
+          novaEquipe: {
+            _id: "",
+            name: "",
+            description: "",
+            members: [],
+            creator: "",
+          },
+        };
       case "SET_EQUIPES":
-        return { ...state, equipe: action.equipe }; 
+        return { ...state, equipe: action.equipe };
       case "INPUT":
         return {
           ...state,
           novaEquipe: {
             ...state.novaEquipe,
-            [action.name]: action.value
-          }
+            [action.name]: action.value,
+          },
         };
       default:
         return state;
@@ -32,19 +44,19 @@ export const EquipeProvider = ({ children }: PropsWithChildren) => {
     dispatch({
       type: "INPUT",
       name: e.target.name as keyof Equipe,
-      value: e.target.value
+      value: e.target.value,
     });
   };
-//! Criar Equipe
+  //! Criar Equipe
   const criarEquipe = async () => {
     try {
       const response = await api.post("equipe/criar", {
         name: state.novaEquipe.name,
-        description: state.novaEquipe.description
+        description: state.novaEquipe.description,
       });
       dispatch({
         type: "CRIAR_EQUIPE",
-        equipe: response.data
+        equipe: response.data,
       });
       alert("Equipe criada com sucesso!");
     } catch (err) {
@@ -52,35 +64,41 @@ export const EquipeProvider = ({ children }: PropsWithChildren) => {
       alert("Erro ao criar equipe");
     }
   };
-//! EquipeGEt
+  //! EquipeGEt
   const equipeGet = async () => {
     try {
       const response = await api.get("/equipe/equipes");
       dispatch({
         type: "SET_EQUIPES",
-        equipe: response.data.response
+        equipe: response.data.response,
       });
     } catch (err) {
       console.log(err);
     }
   };
-//! Equipe delete
-  const deletarEquipe = async(id: string) => {
+  //! Equipe delete
+  const deletarEquipe = async (id: string) => {
     try {
-      console.log(id)
-      await api.delete(`/equipe/delete/${id}`)
-      alert('Equipe deletada com sucesso!')
-    } catch(err) {
-      alert('Erro ao deletar equipe')
-      console.log(err)
+      console.log(id);
+      await api.delete(`/equipe/delete/${id}`);
+      alert("Equipe deletada com sucesso!");
+    } catch (err) {
+      alert("Erro ao deletar equipe");
+      console.log(err);
     }
-  }
-
-
-
+  };
 
   return (
-    <EquipeContext.Provider value={{ state, dispatch, criarEquipe, handleChange, equipeGet, deletarEquipe }}>
+    <EquipeContext.Provider
+      value={{
+        state,
+        dispatch,
+        criarEquipe,
+        handleChange,
+        equipeGet,
+        deletarEquipe,
+      }}
+    >
       {children}
     </EquipeContext.Provider>
   );

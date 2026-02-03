@@ -1,5 +1,4 @@
-import { useContext, useEffect, useState } from "react";
-
+import { useEffect, useState } from "react";
 import { useEquipeTask } from "../../hooks/useEquipeTask";
 import type { Task } from "../../utils/type";
 import { useFuncao } from "../../hooks/useFuncao";
@@ -87,7 +86,10 @@ function ModalDetalhesTask({ title, _id, task, funcaoTask }: Task) {
                         <td>{f.user.name}</td>
                         <td>{f.title}</td>
                         <td className="text-center">
-                          <button className="btn btn-xs btn-warning" onClick={() => deletarFuncao(f._id)}>
+                          <button
+                            className="btn btn-xs btn-warning"
+                            onClick={() => deletarFuncao(f._id)}
+                          >
                             Remover
                           </button>
                         </td>

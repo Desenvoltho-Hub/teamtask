@@ -139,7 +139,7 @@ export interface TaskContextType {
   dispatch: Dispatch<TaskAction>
   criarNovaTask: () => void
   handleChange: (e: ChangeEvent<HTMLInputElement>) => void
-  designarFuncao: () => void
+  designarFuncao: (id: string, task: string) => void
   getTask: () => void
   prazoInteligente: (prazo: string) => void
 }

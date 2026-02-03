@@ -9,6 +9,7 @@ export const criarTask = async (req: Request, res: Response) => {
         const data: any = req.body
         const userId: any = req.user
         const creator = userId.id
+        
        
         const response = await addTask({data, creator})
         res.status(201).json({message: 'Task criada com sucesso!', response}) 
