@@ -1,10 +1,25 @@
 import { useContext, useEffect, useState } from "react";
 import { EquipeContext } from "../../contexts/EquipeContext";
 import type { Task } from "../../utils/type";
+import { TaskContext } from "../../contexts/TaskContext";
 
-function ModalEdicaoTask({ title, description, dataDeEntrega, status }: Task) {
+function ModalEdicaoTask({
+  title,
+  description,
+  dataDeEntrega,
+  status,
+  _id,
+}: Task) {
   const [openModal, setOpenModal] = useState(false);
   const { state: equipeState, equipeGet } = useContext(EquipeContext);
+  const { editarTask } = useContext(TaskContext);
+  const [formData, setFormData] = useState<Task>({
+    title,
+    description,
+    dataDeEntrega,
+    status,
+  });
+
   useEffect(() => {
     equipeGet();
   }, []);
@@ -26,7 +41,10 @@ function ModalEdicaoTask({ title, description, dataDeEntrega, status }: Task) {
               className="input"
               placeholder="Título"
               name="title"
-              value={title}
+              value={formData.title}
+              onChange={(e) =>
+                setFormData({ ...formData, title: e.target.value })
+              }
             />
             <label className="label">Descrição</label>
             <input
@@ -34,15 +52,29 @@ function ModalEdicaoTask({ title, description, dataDeEntrega, status }: Task) {
               className="input"
               placeholder="Descrição"
               name="description"
-              value={description}
+              value={formData.description}
+              onChange={(e) =>
+                setFormData({ ...formData, description: e.target.value })
+              }
             />
             Data de Entrega
-            <input type="date" name="dataDeEntrega" 
-            value={dataDeEntrega}
+            <input
+              type="date"
+              name="dataDeEntrega"
+              value={formData.dataDeEntrega}
+              onChange={(e) =>
+                setFormData({ ...formData, dataDeEntrega: e.target.value })
+              }
             />
             Status
             <div className="flex">
-              <select name="status" className="select">
+              <select
+                name="status"
+                className="select"
+                onChange={(e) =>
+                  setFormData({ ...formData, status: e.target.value })
+                }
+              >
                 <option value={status} disabled={true}>
                   Status
                 </option>
@@ -63,7 +95,7 @@ function ModalEdicaoTask({ title, description, dataDeEntrega, status }: Task) {
             </select>
             <button
               className="btn btn-neutral mt-4"
-              onClick={() => criarNovaTask()}
+              onClick={() => editarTask(_id, formData)}
             >
               Editar
             </button>

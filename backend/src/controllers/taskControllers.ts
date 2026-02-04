@@ -89,12 +89,15 @@ export const designarFuncao = async (req: Request, res: Response) => {
 //! Editar Task
 export const taskEdit = async (req: Request, res: Response) => {
   try {
-    const data: TaskType = req.body.data;
-    const id: string | any = req.params.id;
-    const response = editarTask(id, data)
-    res.status(200).json({message: "Task atualizada com sucesso!", response})
+      const data: TaskType = req.body.data;
+      const id: string | any = req.params.id;
+      
     
-  } catch (err) {
-    res.status(400).json({ err });
+    const response = await editarTask(id, data)
+    
+    res.status(200).json({message: "Task atualizada com sucesso!", response})
+
+  } catch (err: any) {
+    res.status(400).json({ err: err.message });
   }
 };

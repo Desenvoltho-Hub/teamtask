@@ -50,7 +50,7 @@ export const taskGet = async (user: string) => {
     if (!user) {
       throw new Error("Usuário inválido");
     }
-    const response = Task.find({ participants: user });
+    const response = await Task.find({ participants: user });
     return response;
   } catch (err) {}
 };
@@ -81,18 +81,22 @@ export const addFuncao = async ({ title, task, user }: any) => {
 };
 //! Editar task
 export const editarTask = async (id: string, data: TaskType) => {
+    console.log(data.title)
   try {
     const response = Task.findByIdAndUpdate(id, {
-      $addToSet: {
+      
         title: data.title,
         dataDeEntrega: data.dataDeEntrega,
         description: data.description,
         equipe: data.equipe,
-        
-      },
+        status: data.status
+
+    
     }, { new: true });
+   
     return response
   } catch (err) {
+    
     throw err;
   }
 };

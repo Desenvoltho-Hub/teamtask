@@ -51,6 +51,7 @@ function TaskCard({
             description={description}
             dataDeEntrega={dataDeEntrega}
             status={status}
+            _id={task}
           />
         </div>
       </div>

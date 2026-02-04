@@ -142,7 +142,7 @@ export interface TaskContextType {
   designarFuncao: (id: string, task: string) => void
   getTask: () => void
   prazoInteligente: (prazo: string) => void
-  editarTask: (id: string) => void
+  editarTask: (id: string, data: Task) => void
 }
 export interface TaskDesign {
   userId: string
